@@ -1,0 +1,11 @@
+framework module OrangeTrustBadge {
+  umbrella header "OrangeTrustBadge.h"
+
+  export *
+  module * { export * }
+}
+
+module OrangeTrustBadge.Swift {
+    header "OrangeTrustBadge-Swift.h"
+    requires objc
+}

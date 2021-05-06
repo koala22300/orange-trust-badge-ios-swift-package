@@ -1,0 +1,156 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OrangeTrustBadge
+import Foundation
+@_exported import OrangeTrustBadge
+import Swift
+import UIKit
+import WebKit
+@objc public protocol TrustBadgeDelegate {
+  @objc optional func shouldDisplayCustomViewController() -> Swift.Bool
+  @objc optional func viewController(at indexPath: Foundation.IndexPath) -> UIKit.UIViewController
+}
+@_inheritsConvenienceInitializers @objc open class TrustBadgeConfig : ObjectiveC.NSObject {
+  @objc open var appName: Swift.String?
+  @objc open var highlightColor: UIKit.UIColor
+  @objc open var headerColor: UIKit.UIColor
+  @objc open var headerTextColor: UIKit.UIColor
+  @objc open var headerLogo: UIKit.UIImage?
+  @objc open var statusBarStyle: UIKit.UIStatusBarStyle
+  @objc open var modalPresentationStyle: UIKit.UIModalPresentationStyle
+  @objc open var isTrackingEnabled: () -> Swift.Bool
+  @objc open var isIdentityUsed: () -> Swift.Bool
+  @objc open var isAdvertisementUsed: () -> Swift.Bool
+  @objc open var isHistoryUsed: () -> Swift.Bool
+  @objc open var isPhoneNumberUsed: () -> Swift.Bool
+  @objc open var isHealfDataUsed: () -> Swift.Bool
+  @objc open var isHomeKitUsed: () -> Swift.Bool
+  @objc open var isMotionFitnessUsed: () -> Swift.Bool
+  @objc open var updateTracking: (UIKit.UISwitch) -> Swift.Void
+  @objc open var devicePermissions: [OrangeTrustBadge.TrustBadgeElement] {
+    @objc get
+    @objc set
+  }
+  @objc open var applicationData: [OrangeTrustBadge.TrustBadgeElement] {
+    @objc get
+    @objc set
+  }
+  @objc open var terms: [OrangeTrustBadge.Term] {
+    @objc get
+    @objc set
+  }
+  @objc open var pageDidAppear: ((Swift.String) -> Swift.Void)?
+  @objc open var localizedString: (Swift.String) -> Swift.String?
+  @objc open var loadImage: (Swift.String) -> UIKit.UIImage?
+  @objc open func elementForType(_ type: OrangeTrustBadge.ElementType) -> [OrangeTrustBadge.PreDefinedElement]
+  @objc deinit
+  @objc override dynamic public init()
+}
+@_inheritsConvenienceInitializers @objc open class TrustBadge : ObjectiveC.NSObject {
+  public static let TRUSTBADGE_ENTER: Swift.String
+  public static let TRUSTBADGE_PERMISSION_ENTER: Swift.String
+  public static let TRUSTBADGE_USAGE_ENTER: Swift.String
+  public static let TRUSTBADGE_TERMS_ENTER: Swift.String
+  public static let TRUSTBADGE_LEAVE: Swift.String
+  public static let TRUSTBADGE_ELEMENT_TAPPED: Swift.String
+  public static let TRUSTBADGE_ELEMENT_TOGGLED: Swift.String
+  public static let TRUSTBADGE_GO_TO_SETTINGS: Swift.String
+  public static let shared: OrangeTrustBadge.TrustBadge
+  public var delegate: OrangeTrustBadge.TrustBadgeDelegate?
+  @objc public static func with(_ configuration: OrangeTrustBadge.TrustBadgeConfig)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum ElementType : Swift.Int {
+  case location
+  case contacts
+  case photoLibrary
+  case media
+  case calendar
+  case camera
+  case reminders
+  case bluetoothSharing
+  case microphone
+  case speechRecognition
+  case health
+  case homekit
+  case motionFitness
+  case notifications
+  case identity
+  case accountInformations
+  case dataUsage
+  case advertising
+  case history
+  public var name: Swift.String {
+    get
+  }
+  public static var regularDevicePermissions: [OrangeTrustBadge.ElementType] {
+    get
+  }
+  public var isDevicePermission: Swift.Bool {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+}
+@objc open class PreDefinedElement : OrangeTrustBadge.TrustBadgeElement {
+  @objc open var shouldBeAutoConfigured: Swift.Bool
+  @objc public init(type: OrangeTrustBadge.ElementType)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_inheritsConvenienceInitializers open class DailymotionPlayer : WebKit.WKWebView, WebKit.WKNavigationDelegate {
+  open func load(_ video: Swift.String)
+  @objc deinit
+  open func pause()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect, configuration: WebKit.WKWebViewConfiguration)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+@objc open class CustomElement : OrangeTrustBadge.TrustBadgeElement {
+  @objc public init(nameKey: Swift.String, descriptionKey: Swift.String, statusEnabledIconName: Swift.String, statusDisabledIconName: Swift.String)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@_inheritsConvenienceInitializers @objc open class TrustBadgeElement : ObjectiveC.NSObject {
+  @objc open var isToggable: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc open var toggleClosure: (UIKit.UISwitch) -> Swift.Void
+  @objc open var statusClosure: () -> Swift.Bool
+  @objc open var showStatus: Swift.Bool
+  @objc open var isConfigurable: Swift.Bool
+  @objc open var nameKey: Swift.String
+  @objc open var descriptionKey: Swift.String
+  @objc open var statusEnabledIconName: Swift.String
+  @objc open var statusDisabledIconName: Swift.String
+  @objc open var isExpanded: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum TermType : Swift.Int {
+  case text
+  case video
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc open class Term : ObjectiveC.NSObject {
+  @objc open var type: OrangeTrustBadge.TermType
+  @objc open var titleKey: Swift.String
+  @objc open var contentKey: Swift.String
+  @objc public init(type: OrangeTrustBadge.TermType, titleKey: Swift.String, contentKey: Swift.String)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension OrangeTrustBadge.ElementType : Swift.Equatable {}
+extension OrangeTrustBadge.ElementType : Swift.Hashable {}
+extension OrangeTrustBadge.ElementType : Swift.RawRepresentable {}
+extension OrangeTrustBadge.TermType : Swift.Equatable {}
+extension OrangeTrustBadge.TermType : Swift.Hashable {}
+extension OrangeTrustBadge.TermType : Swift.RawRepresentable {}
